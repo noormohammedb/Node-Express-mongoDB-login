@@ -25,8 +25,8 @@ body {
   background: #ffffffc5;
   border-radius: 5px;
   height: 30px;
+  border: 1px #4e4d4d solid;
   outline: none;
-  border: none;
 }
 #form-page input:hover{
   background: #ffffffee;
