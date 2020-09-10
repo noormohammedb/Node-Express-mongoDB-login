@@ -2,10 +2,12 @@
    <h2 class="text-center">{{button}}</h2>
 
    <form action="{{action}}" method="POST">
+      {{#if username}}
       <label for="username">
          UserName :
       </label>
       <input type="text" name="username" id="username">
+      {{/if}}
       <label for="email">
          Email :
       </label>
