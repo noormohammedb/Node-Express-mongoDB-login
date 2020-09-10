@@ -1,8 +1,48 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #252525;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #dfB7FF;
+  text-align: center;
 }
 
-a {
-  color: #00B7FF;
+#login-page form{
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px;
+  height: 250px;
+  width: 250px;
+  border: 1px #fff solid;
+}
+#login-page input{
+  background: #ffffffc5;
+  border-radius: 5px;
+  height: 30px;
+  outline: none;
+  border: none;
+}
+#login-page input:hover{
+  background: #ffffffee;
+}
+#login-page input:focus{
+  background: #ffffff;
+}
+#login-page .button{
+  background: #aaa1a1;
+}
+#login-page .ali-r{
+  text-align: right;
+  margin: 0;
+  
+}
+
+a{
+  color: #0689a0;
+  text-decoration: none;
 }
