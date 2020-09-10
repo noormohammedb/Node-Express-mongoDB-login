@@ -6,13 +6,19 @@ const MongoClient = mongodb.MongoClient;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'login page' });
+  hbsObject = {title:'login page',action:'/login',button:'Login',anchar:'Signup',href:'/signup'};
+  res.render('index',hbsObject);
 });
-router.post('/', (req, res, next) => {
+router.get('/signup',(req, res, next)=>{
+  hbsObject = {title:'signup page',action:'/signup',button:'Signup',anchar:'login',href:'/'};
+  res.render('index',hbsObject)
+});
+
+router.post('/signup', (req, res, next) => {
   console.log(req.body);
 
   MongoClient.connect('mongodb://127.0.0.1:27017', (error, client) => {
-
+    
     if (error) {
       console.log('DataBase Connection Error');
     }
@@ -21,8 +27,13 @@ router.post('/', (req, res, next) => {
     }
 
   });
+  
+  hbsObject = {title:'signup sucess',user:req.body.username,done:'signup',click:true};
+  res.render('signup_or_login_sucess',hbsObject);
+});
 
-  res.send('gotit');
+router.post('/login',(req,res,next) => {
+  
 });
 
 module.exports = router;

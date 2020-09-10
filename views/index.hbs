@@ -1,18 +1,22 @@
-<div class="container" id="login-page">
-<h2>Login</h2>
+<div class="container" id="form-page">
+   <h2 class="text-center">{{button}}</h2>
 
-   <form action="/" method="POST">
+   <form action="{{action}}" method="POST">
       <label for="username">
+         UserName :
+      </label>
+      <input type="text" name="username" id="username">
+      <label for="email">
          Email :
       </label>
-      <input type="text" name="email" id="username">
+      <input type="text" name="email" id="email">
       <label for="password">
          Password :
       </label>
       <input type="password" name="password" id="password">
-      <input type="submit" value="login" class="button">
+      <input type="submit" value=" {{button}} " class="button">
       <p class="ali-r">
-         <a href="">login-or-signup</a>
+         <a href="{{href}}">{{anchar}}</a>
       </p>
    </form>
 
