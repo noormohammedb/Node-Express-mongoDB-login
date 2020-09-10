@@ -54,16 +54,28 @@ router.post('/login',(req,res,next) => {
       res.send('DataBase Error');
     }
     else{
-      client.db('express').collection('users').find({email:req.body.email}).toArray((error,data)=>{
+      client.db('express').collection('users').findOne({email:req.body.email},(error,data)=>{
         if(error){
           console.log('error in find method');
           console.log(error);
           res.send('data not found');
         }
-        else{
-          console.log('find done data is :');
+        else if(data){
+          console.log('find done. data is :');
           console.log(data);
-          res.send(data);
+          
+            if(req.body.password == data.password){
+              console.log('password matched');
+              res.send('login sucess');
+            }
+            else{
+              console.log('credentials missmatch')
+              res.send('credentials missmatch')
+            }
+        }
+        else{
+          console.log('data not found');
+          res.send('not exist')
         }
         client.close();
       });
