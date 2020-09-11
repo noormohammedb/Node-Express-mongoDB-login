@@ -1,6 +1,6 @@
 var express = require('express');
 const MongoClient = require('mongodb').MongoClient;
-
+const dbUrl = 'mongodb://127.0.0.1:27017';
 var router = express.Router();
 
 /* GET home page. */
@@ -16,12 +16,13 @@ router.get('/signup',(req, res, next)=>{
 router.post('/signup', (req, res, next) => {
   console.log(req.body);
 
-  MongoClient.connect('mongodb://127.0.0.1:27017',{useUnifiedTopology:true}, (error, client) => {
+  MongoClient.connect(dbUrl,{useUnifiedTopology:true}, (error, client) => {
     
     if (error) {
       console.log('DataBase Connection Error');
       console.log(error);
-      res.send('Database Error')
+      hbsObject = {title:'signup page',action:'/signup',button:'Signup',anchar:'login',href:'/',username:true,error:true,error_message:'Database Connection Error'}
+      res.render('index',hbsObject);
     }
     else {
       client.db('express').collection('users').insertOne(req.body,(error,data)=>{
@@ -33,7 +34,7 @@ router.post('/signup', (req, res, next) => {
         else{
           console.log('Database insert sucess');
           console.log(data.ops);
-          hbsObject = {title:'signup sucess',user:req.body.username,done:'signup',click:true};
+          hbsObject = {title:'signup sucess',user:req.body.username,done:'signup',click:true,completed:'completed'};
           res.render('signup_or_login_sucess',hbsObject);
         }
         client.close();
@@ -43,15 +44,19 @@ router.post('/signup', (req, res, next) => {
   });
   
 });
+router.get('/login', function (req, res, next) {
+  res.redirect('/')
+});
 
 router.post('/login',(req,res,next) => {
   console.log(req.body);
 
-  MongoClient.connect('mongodb://127.0.0.1:27017/',{useUnifiedTopology:true},(error,client)=>{
+  MongoClient.connect(dbUrl,{useUnifiedTopology:true},(error,client)=>{
     if(error){
       console.log("DataBase Connection Error");
       console.log(error);
-      res.send('DataBase Error');
+      hbsObject = {title:'login page',action:'/login',button:'Login',anchar:'Signup',href:'/signup',username:false,error:true,error_message:'Database Connection Error'}
+      res.render('index',hbsObject);
     }
     else{
       client.db('express').collection('users').findOne({email:req.body.email},(error,data)=>{
@@ -65,7 +70,7 @@ router.post('/login',(req,res,next) => {
           console.log(data);
             if(req.body.password == data.password){
               console.log('password matched');
-              hbsObject = {title:'login sucess',user:data.username,done:'login',click:false};
+              hbsObject = {title:'login sucess',user:data.username,done:'login',completed:'sucessfull'};
               res.render('signup_or_login_sucess',hbsObject);
             }
             else{

@@ -42,7 +42,14 @@ body {
   margin: 0;
 
 }
-
+.warning{
+  color: #be74fa;
+  text-decoration: underline;
+}
+.ermsg{
+  color: #79338a;
+  font-size: 1.1rem;
+}
 a{
   color: #0689a0;
   text-decoration: none;

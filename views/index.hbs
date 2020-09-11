@@ -22,4 +22,11 @@
       </p>
    </form>
 
+   {{#if error}}
+   <h2 class="text-center">
+      <span class="warning">Error :</span>
+   </h2>
+   <p class="ermsg text-center">{{error_message}} </p>
+   {{/if}}
+
 </div>
