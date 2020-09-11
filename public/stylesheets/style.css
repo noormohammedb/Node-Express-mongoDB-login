@@ -40,7 +40,10 @@ body {
 #form-page .ali-r{
   text-align: right;
   margin: 0;
-
+}
+#form-page .form-warning{
+  font-size: 0.9rem;
+  color: #1bd4f5;
 }
 .warning{
   color: #be74fa;

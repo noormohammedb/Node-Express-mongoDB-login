@@ -16,6 +16,12 @@
          Password :
       </label>
       <input type="password" name="password" id="password">
+        {{#if pass_wrong}}
+         <p class="form-warning ali-r">email or password incurect</p>
+        {{/if}}
+        {{#if no_acc}}
+         <p class="form-warning ali-r">account does not exist please signup</p>
+        {{/if}}
       <input type="submit" value=" {{button}} " class="button">
       <p class="ali-r">
          <a href="{{href}}">{{anchar}}</a>

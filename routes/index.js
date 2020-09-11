@@ -29,7 +29,8 @@ router.post('/signup', (req, res, next) => {
         if(error){
           console.log('Database insert error');
           console.log(error);
-          res.send('database insert error');
+          hbsObject = {title:'signup page',action:'/signup',button:'Signup',anchar:'login',href:'/',username:true,error:true,error_message:'Signup Failed Please Try Again Later'}
+          res.render('index',hbsObject);
         }
         else{
           console.log('Database insert sucess');
@@ -63,24 +64,27 @@ router.post('/login',(req,res,next) => {
         if(error){
           console.log('error in find method');
           console.log(error);
-          res.send('data not found');
+          hbsObject = {title:'login page',action:'/login',button:'Login',anchar:'Signup',href:'/signup',username:false,error:true,error_message:'User Not Found'}
+          res.render('index',hbsObject);
         }
         else if(data){
           console.log('find done. data is :');
           console.log(data);
-            if(req.body.password == data.password){
-              console.log('password matched');
-              hbsObject = {title:'login sucess',user:data.username,done:'login',completed:'sucessfull'};
-              res.render('signup_or_login_sucess',hbsObject);
-            }
-            else{
-              console.log('credentials missmatch')
-              res.send('credentials missmatch')
-            }
+          if(req.body.password == data.password){
+            console.log('password matched');
+            hbsObject = {title:'login sucess',user:data.username,done:'login',completed:'sucessfull'};
+            res.render('signup_or_login_sucess',hbsObject);
+          }
+          else{
+            console.log('credentials missmatch')
+            hbsObject = {title:'login page',action:'/login',button:'Login',anchar:'Signup',href:'/signup',username:false,pass_wrong:true}
+            res.render('index',hbsObject);
+          }
         }
         else{
           console.log('data not found');
-          res.send('not exist')
+          hbsObject = {title:'login page',action:'/login',button:'Login',anchar:'Signup',href:'/signup',username:false,no_acc:true}
+          res.render('index',hbsObject);
         }
         client.close();
       });
