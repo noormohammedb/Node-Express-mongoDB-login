@@ -63,10 +63,10 @@ router.post('/login',(req,res,next) => {
         else if(data){
           console.log('find done. data is :');
           console.log(data);
-          
             if(req.body.password == data.password){
               console.log('password matched');
-              res.send('login sucess');
+              hbsObject = {title:'login sucess',user:data.username,done:'login',click:false};
+              res.render('signup_or_login_sucess',hbsObject);
             }
             else{
               console.log('credentials missmatch')
