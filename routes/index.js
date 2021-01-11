@@ -2,7 +2,7 @@ require("dotenv").config();
 var express = require("express");
 const MongoClient = require("mongodb").MongoClient;
 // const {username, password, database} = require('../config');
-const database = "express-login";
+const database = "login-app";
 const dbUrl = process.env.DBURL;
 var router = express.Router();
 
@@ -37,7 +37,7 @@ router.post("/signup", (req, res, next) => {
   MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (error, client) => {
     if (error) {
       console.log("DataBase Connection Error");
-      // console.log(error);
+      console.log(error);
       hbsObject = {
         title: "signup page",
         action: "/signup",
